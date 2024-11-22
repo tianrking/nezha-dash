@@ -57,7 +57,7 @@ export default function ServerListClient() {
     };
   }, []);
 
-  const { data, error } = useSWR<ServerApi>("/api/server", nezhaFetcher, {
+  const { data, error } = useSWR<ServerApi>(process.env.NEXT_PUBLIC_BASE_PATH || '' || '' + "/api/server", nezhaFetcher, {
     refreshInterval: Number(getEnv("NEXT_PUBLIC_NezhaFetchInterval")) || 2000,
   });
 
@@ -82,8 +82,8 @@ export default function ServerListClient() {
     status === "all"
       ? sortedServers
       : sortedServers.filter((server) =>
-          [status].includes(server.online_status ? "online" : "offline"),
-        );
+        [status].includes(server.online_status ? "online" : "offline"),
+      );
 
   const allTag = filteredServersByStatus
     .map((server) => server.tag)

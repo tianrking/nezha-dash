@@ -18,7 +18,7 @@ export default function ServerOverviewClient() {
   const { filter, setFilter } = useFilter();
   const t = useTranslations("ServerOverviewClient");
   const { data, error, isLoading } = useSWR<ServerApi>(
-    "/api/server",
+    process.env.NEXT_PUBLIC_BASE_PATH || '' + "/api/server",
     nezhaFetcher,
   );
   const disableCartoon = getEnv("NEXT_PUBLIC_DisableCartoon") === "true";

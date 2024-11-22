@@ -40,7 +40,7 @@ export function NetworkChartClient({
 }) {
   const t = useTranslations("NetworkChartClient");
   const { data, error } = useSWR<NezhaAPIMonitor[]>(
-    `/api/monitor?server_id=${server_id}`,
+    process.env.NEXT_PUBLIC_BASE_PATH + `/api/monitor?server_id=${server_id}`,
     nezhaFetcher,
     {
       refreshInterval:

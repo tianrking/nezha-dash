@@ -64,7 +64,7 @@ export default function ServerDetailChartClient({
   const t = useTranslations("ServerDetailChartClient");
 
   const { data: allFallbackData } = useSWRImmutable<ServerApi>(
-    "/api/server",
+    process.env.NEXT_PUBLIC_BASE_PATH || '' + "/api/server",
     nezhaFetcher,
   );
   const fallbackData = allFallbackData?.result?.find(
@@ -72,7 +72,7 @@ export default function ServerDetailChartClient({
   );
 
   const { data, error } = useSWR<NezhaAPISafe>(
-    `/api/detail?server_id=${server_id}`,
+    process.env.NEXT_PUBLIC_BASE_PATH || '' + `/api/detail?server_id=${server_id}`,
     nezhaFetcher,
     {
       refreshInterval: Number(getEnv("NEXT_PUBLIC_NezhaFetchInterval")) || 5000,
